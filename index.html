@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>IGN Consulting — Custom Development Solutions</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@200;300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --ink:#0d1117;
+  --ink2:#1c2333;
+  --paper:#f7f5f0;
+  --paper2:#ede9e0;
+  --rule:rgba(13,17,23,0.1);
+  --rule2:rgba(13,17,23,0.06);
+  --accent:#c0392b;
+  --accent2:#e74c3c;
+  --gold:#b8860b;
+  --w:#fff;
+  --t2:#4a5568;
+  --t3:#9aa3b0;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{font-size:16px;scroll-behavior:smooth}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:'DM Sans',sans-serif;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ── GRAIN ── */
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:0;opacity:.7;
+}
+
+/* ── NAV ── */
+nav{
+  position:fixed;inset:0 0 auto;z-index:200;
+  padding:0 64px;height:64px;
+  display:flex;align-items:center;justify-content:space-between;
+  border-bottom:1px solid transparent;
+  transition:all .4s;
+  background:rgba(247,245,240,0);
+}
+nav.s{
+  background:rgba(247,245,240,0.95);
+  backdrop-filter:blur(16px);
+  border-bottom-color:var(--rule);
+}
+.logo{
+  display:flex;align-items:center;gap:12px;
+  text-decoration:none;
+}
+.logo-mark{
+  width:32px;height:32px;
+  background:var(--ink);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Playfair Display',serif;
+  font-size:14px;font-weight:900;
+  color:var(--paper);letter-spacing:-.02em;
+}
+.logo-text{
+  font-family:'Playfair Display',serif;
+  font-size:16px;font-weight:700;
+  color:var(--ink);letter-spacing:-.01em;
+}
+.logo-sub{
+  font-size:9px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--t3);display:block;margin-top:-2px;
+}
+.nl{display:flex;align-items:center;gap:36px}
+.nl a{
+  font-size:12px;font-weight:400;letter-spacing:.04em;
+  color:var(--t2);text-decoration:none;transition:color .2s;
+}
+.nl a:hover{color:var(--ink)}
+.nav-cta{
+  font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--paper);background:var(--ink);
+  padding:10px 24px;text-decoration:none;transition:all .2s;
+}
+.nav-cta:hover{background:var(--ink2)}
+.nmob{display:none;background:none;border:none;color:var(--ink);font-size:18px}
+
+/* ── HERO ── */
+.hero{
+  min-height:100vh;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  position:relative;
+  overflow:hidden;
+}
+.hero-left{
+  background:var(--ink);
+  padding:140px 64px 80px;
+  display:flex;flex-direction:column;
+  justify-content:flex-end;
+  position:relative;overflow:hidden;
+}
+/* diagonal line decoration */
+.hero-left::before{
+  content:'';
+  position:absolute;
+  top:-100px;right:-60px;
+  width:1px;height:160%;
+  background:rgba(255,255,255,0.06);
+  transform:rotate(12deg);
+}
+.hero-left::after{
+  content:'';
+  position:absolute;
+  top:-100px;right:40px;
+  width:1px;height:160%;
+  background:rgba(255,255,255,0.04);
+  transform:rotate(12deg);
+}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:9px;letter-spacing:.22em;text-transform:uppercase;
+  color:rgba(255,255,255,0.35);margin-bottom:32px;
+}
+.hero-tag-line{width:24px;height:1px;background:var(--accent)}
+.hero-h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(48px,6vw,80px);
+  font-weight:900;line-height:.95;
+  letter-spacing:-.03em;
+  color:var(--w);margin-bottom:28px;
+}
+.hero-h1 em{
+  font-style:italic;font-weight:400;
+  color:rgba(255,255,255,0.45);
+}
+.hero-sub{
+  font-size:14px;line-height:1.8;
+  color:rgba(255,255,255,0.5);
+  font-weight:300;max-width:380px;
+  margin-bottom:48px;
+}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap}
+.hbp{
+  font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink);background:var(--paper);
+  padding:14px 32px;text-decoration:none;transition:all .25s;
+}
+.hbp:hover{background:var(--w);transform:translateY(-2px)}
+.hbg{
+  font-size:11px;font-weight:400;letter-spacing:.1em;text-transform:uppercase;
+  color:rgba(255,255,255,0.5);
+  border:1px solid rgba(255,255,255,0.15);
+  padding:14px 32px;text-decoration:none;transition:all .2s;
+}
+.hbg:hover{color:var(--w);border-color:rgba(255,255,255,.35)}
+.hero-bottom-stat{
+  margin-top:64px;padding-top:32px;
+  border-top:1px solid rgba(255,255,255,0.08);
+  display:flex;gap:40px;
+}
+.hbs-item{}
+.hbs-num{
+  font-family:'Playfair Display',serif;
+  font-size:28px;font-weight:700;
+  color:var(--w);line-height:1;margin-bottom:4px;
+}
+.hbs-label{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3)}
+
+.hero-right{
+  background:var(--paper);
+  padding:140px 64px 80px;
+  display:flex;flex-direction:column;
+  justify-content:flex-end;
+  position:relative;
+  border-left:1px solid var(--rule);
+}
+/* right side decorative grid */
+.hero-grid{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(var(--rule2) 1px,transparent 1px),
+    linear-gradient(90deg,var(--rule2) 1px,transparent 1px);
+  background-size:48px 48px;
+  mask-image:radial-gradient(ellipse 80% 80% at 80% 80%,black,transparent);
+}
+.hero-card{
+  background:var(--w);
+  border:1px solid var(--rule);
+  padding:36px;
+  position:relative;z-index:1;
+  box-shadow:0 24px 60px rgba(13,17,23,0.08);
+  margin-bottom:16px;
+  transition:transform .3s,box-shadow .3s;
+}
+.hero-card:hover{transform:translateY(-4px);box-shadow:0 32px 80px rgba(13,17,23,0.12)}
+.hc-label{
+  font-size:9px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--t3);margin-bottom:16px;
+  display:flex;align-items:center;gap:8px;
+}
+.hc-dot{width:6px;height:6px;border-radius:50%;background:var(--accent)}
+.hc-title{
+  font-family:'Playfair Display',serif;
+  font-size:20px;font-weight:700;
+  color:var(--ink);margin-bottom:8px;letter-spacing:-.01em;
+}
+.hc-desc{font-size:12px;line-height:1.7;color:var(--t2);font-weight:300}
+.hc-tags{display:flex;gap:6px;margin-top:16px;flex-wrap:wrap}
+.hc-tag{
+  font-size:9px;letter-spacing:.1em;text-transform:uppercase;
+  border:1px solid var(--rule);padding:4px 10px;color:var(--t3);
+}
+.hero-right-label{
+  font-size:11px;color:var(--t3);letter-spacing:.04em;
+  position:relative;z-index:1;margin-top:4px;
+}
+
+/* ── SERVICES ── */
+.services{
+  padding:140px 64px;
+  max-width:1400px;margin:0 auto;
+}
+.sec-head{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:80px;align-items:end;margin-bottom:80px;
+}
+.sec-tag{
+  font-size:9px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:16px;display:block;
+}
+.sec-h2{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(36px,5vw,60px);
+  font-weight:900;line-height:.96;
+  letter-spacing:-.03em;color:var(--ink);
+}
+.sec-h2 em{font-style:italic;font-weight:400;color:var(--t2)}
+.sec-desc{
+  font-size:15px;line-height:1.8;
+  color:var(--t2);font-weight:300;
+  border-left:2px solid var(--accent);padding-left:20px;
+}
+.srv-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1px;background:var(--rule);
+  border:1px solid var(--rule);
+}
+.srv{
+  background:var(--paper);padding:40px;
+  transition:background .3s;
+  position:relative;overflow:hidden;
+}
+.srv:hover{background:var(--w)}
+.srv::before{
+  content:'';position:absolute;bottom:0;left:0;right:0;
+  height:2px;background:var(--accent);
+  transform:scaleX(0);transform-origin:left;
+  transition:transform .4s ease;
+}
+.srv:hover::before{transform:scaleX(1)}
+.srv-num{
+  font-family:'DM Mono',monospace;
+  font-size:11px;color:var(--t3);
+  margin-bottom:24px;letter-spacing:.05em;
+}
+.srv-title{
+  font-family:'Playfair Display',serif;
+  font-size:22px;font-weight:700;
+  color:var(--ink);margin-bottom:12px;
+  letter-spacing:-.02em;
+}
+.srv-desc{font-size:13px;line-height:1.75;color:var(--t2);font-weight:300}
+.srv-link{
+  display:inline-flex;align-items:center;gap:8px;
+  margin-top:24px;font-size:11px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--ink);text-decoration:none;
+  transition:gap .2s;
+}
+.srv:hover .srv-link{gap:14px}
+
+/* ── WORK EXAMPLES ── */
+.work{
+  background:var(--ink);
+  padding:140px 64px;
+}
+.work-inner{max-width:1400px;margin:0 auto}
+.work-head{
+  display:flex;align-items:flex-end;justify-content:space-between;
+  margin-bottom:64px;flex-wrap:wrap;gap:24px;
+}
+.work-h2{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(36px,5vw,60px);
+  font-weight:900;line-height:.96;
+  letter-spacing:-.03em;color:var(--w);
+}
+.work-h2 em{font-style:italic;font-weight:400;color:rgba(255,255,255,.4)}
+.work-link{
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  color:rgba(255,255,255,.4);text-decoration:none;
+  display:flex;align-items:center;gap:8px;transition:color .2s;
+}
+.work-link:hover{color:var(--w)}
+.work-grid{
+  display:grid;grid-template-columns:1.4fr 1fr 1fr;
+  gap:1px;background:rgba(255,255,255,0.06);
+}
+.wc{
+  background:var(--ink2);
+  padding:40px;
+  transition:background .3s;
+  position:relative;overflow:hidden;
+  cursor:default;
+}
+.wc:hover{background:#232d3f}
+.wc-tag{
+  font-size:9px;letter-spacing:.18em;text-transform:uppercase;
+  color:rgba(255,255,255,.3);margin-bottom:20px;
+  display:flex;align-items:center;gap:8px;
+}
+.wc-dot{width:4px;height:4px;border-radius:50%;background:var(--accent)}
+.wc-title{
+  font-family:'Playfair Display',serif;
+  font-size:20px;font-weight:700;
+  color:var(--w);margin-bottom:10px;letter-spacing:-.01em;
+}
+.wc-desc{font-size:12px;line-height:1.7;color:rgba(255,255,255,.4);font-weight:300}
+.wc-industry{
+  display:inline-block;margin-top:20px;
+  font-size:9px;letter-spacing:.12em;text-transform:uppercase;
+  border:1px solid rgba(255,255,255,.1);padding:4px 10px;
+  color:rgba(255,255,255,.3);
+}
+
+/* ── ABOUT STRIP ── */
+.about-strip{
+  border-top:1px solid var(--rule);
+  border-bottom:1px solid var(--rule);
+  padding:32px 64px;
+  display:flex;align-items:center;gap:0;
+  overflow:hidden;
+}
+.as-item{
+  display:flex;align-items:center;gap:12px;
+  padding:0 48px;
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--t3);white-space:nowrap;
+  border-right:1px solid var(--rule);
+}
+.as-item:first-child{padding-left:0}
+.as-item:last-child{border-right:none}
+.as-bold{font-weight:500;color:var(--ink)}
+
+/* ── CONTACT ── */
+.contact{
+  padding:140px 64px;
+  max-width:1400px;margin:0 auto;
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:120px;align-items:start;
+}
+.con-left{}
+.con-tag{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;display:block}
+.con-h2{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(36px,5vw,56px);
+  font-weight:900;line-height:.96;
+  letter-spacing:-.03em;color:var(--ink);
+  margin-bottom:20px;
+}
+.con-h2 em{font-style:italic;font-weight:400;color:var(--t2)}
+.con-sub{font-size:14px;line-height:1.8;color:var(--t2);font-weight:300;margin-bottom:40px}
+.con-info{display:flex;flex-direction:column;gap:0;border:1px solid var(--rule)}
+.ci{
+  padding:20px 24px;border-bottom:1px solid var(--rule);
+  display:flex;align-items:center;gap:16px;
+}
+.ci:last-child{border-bottom:none}
+.ci-label{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);width:80px;flex-shrink:0}
+.ci-value{font-size:13px;color:var(--ink);font-weight:400}
+.con-right{}
+.ff{display:flex;flex-direction:column;gap:6px;margin-bottom:20px}
+.ff label{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--t3)}
+.ff input,.ff textarea,.ff select{
+  background:var(--w);border:1px solid var(--rule);
+  color:var(--ink);padding:14px 18px;
+  font-family:'DM Sans',sans-serif;font-size:13px;font-weight:300;
+  outline:none;transition:border-color .25s;resize:none;
+  -webkit-appearance:none;
+}
+.ff input:focus,.ff textarea:focus,.ff select:focus{border-color:var(--ink)}
+.ff input::placeholder,.ff textarea::placeholder{color:var(--t3)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.fsub{
+  width:100%;background:var(--ink);color:var(--paper);
+  font-family:'DM Sans',sans-serif;font-size:11px;font-weight:500;
+  letter-spacing:.14em;text-transform:uppercase;
+  padding:17px;border:none;margin-top:8px;transition:background .2s;
+}
+.fsub:hover{background:var(--ink2)}
+
+/* ── FOOTER ── */
+footer{
+  background:var(--ink);
+  border-top:1px solid rgba(255,255,255,0.06);
+  padding:48px 64px;
+  display:grid;grid-template-columns:1fr 1fr 1fr;
+  gap:48px;align-items:center;
+}
+.ft-logo .logo-text{color:var(--paper)}
+.ft-logo .logo-mark{background:var(--paper);color:var(--ink)}
+.ft-logo .logo-sub{color:rgba(255,255,255,.3)}
+.ft-links{display:flex;gap:24px;justify-content:center;flex-wrap:wrap}
+.ft-links a{font-size:11px;color:rgba(255,255,255,.35);text-decoration:none;letter-spacing:.04em;transition:color .2s}
+.ft-links a:hover{color:var(--w)}
+.ft-copy{font-size:11px;color:rgba(255,255,255,.25);text-align:right;letter-spacing:.02em}
+
+/* ── REVEALS ── */
+.rv{opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s ease}
+.rv.on{opacity:1;transform:none}
+.rv.d1{transition-delay:.08s}.rv.d2{transition-delay:.16s}.rv.d3{transition-delay:.24s}.rv.d4{transition-delay:.32s}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1024px){
+  nav{padding:0 32px}
+  .nl,.nav-cta{display:none}
+  .nmob{display:block}
+  .hero{grid-template-columns:1fr}
+  .hero-left{padding:120px 32px 64px}
+  .hero-right{display:none}
+  .services,.contact{padding:80px 32px;grid-template-columns:1fr}
+  .sec-head{grid-template-columns:1fr;gap:24px}
+  .srv-grid{grid-template-columns:1fr}
+  .work{padding:80px 32px}
+  .work-grid{grid-template-columns:1fr}
+  .about-strip{padding:24px 32px;flex-wrap:wrap;gap:16px}
+  .as-item{padding:0 24px;border-right:none}
+  footer{grid-template-columns:1fr;gap:24px;padding:40px 32px;text-align:center}
+  .ft-copy{text-align:center}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="/" class="logo">
+    <div class="logo-mark">IGN</div>
+    <div>
+      <div class="logo-text">IGN Consulting</div>
+      <span class="logo-sub">Custom Development</span>
+    </div>
+  </a>
+  <div class="nl">
+    <a href="#services">Services</a>
+    <a href="#work">Our Work</a>
+    <a href="#contact">Contact</a>
+    <a href="#privacy">Privacy</a>
+  </div>
+  <a href="#contact" class="nav-cta">Start a Project</a>
+  <button class="nmob">☰</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-tag"><div class="hero-tag-line"></div>Custom Software & Development</div>
+    <h1 class="hero-h1">
+      We build<br>what others<br><em>cannot.</em>
+    </h1>
+    <p class="hero-sub">Specialised consulting and custom development across manufacturing, healthcare, finance, and enterprise systems. Built for precision, not convenience.</p>
+    <div class="hero-btns">
+      <a href="#contact" class="hbp">Start a project</a>
+      <a href="#work" class="hbg">View our work</a>
+    </div>
+    <div class="hero-bottom-stat">
+      <div class="hbs-item">
+        <div class="hbs-num">17+</div>
+        <div class="hbs-label">Years active</div>
+      </div>
+      <div class="hbs-item">
+        <div class="hbs-num">50+</div>
+        <div class="hbs-label">Industries served</div>
+      </div>
+      <div class="hbs-item">
+        <div class="hbs-num">100%</div>
+        <div class="hbs-label">Custom solutions</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-grid"></div>
+    <div class="hero-card">
+      <div class="hc-label"><div class="hc-dot"></div>Current engagement</div>
+      <div class="hc-title">Enterprise Process Automation</div>
+      <div class="hc-desc">Full redesign of legacy manufacturing workflow system across 3 plants, reducing manual touchpoints by 74%.</div>
+      <div class="hc-tags">
+        <div class="hc-tag">Manufacturing</div>
+        <div class="hc-tag">C#</div>
+        <div class="hc-tag">.NET 8</div>
+      </div>
+    </div>
+    <div class="hero-card">
+      <div class="hc-label"><div class="hc-dot"></div>Completed — Q1 2026</div>
+      <div class="hc-title">Real-Time Analytics Dashboard</div>
+      <div class="hc-desc">Custom-built reporting suite integrating 6 data sources for a regional healthcare network.</div>
+      <div class="hc-tags">
+        <div class="hc-tag">Healthcare</div>
+        <div class="hc-tag">Analytics</div>
+        <div class="hc-tag">SQL</div>
+      </div>
+    </div>
+    <div class="hero-right-label">← Hover to interact</div>
+  </div>
+</section>
+
+<!-- ABOUT STRIP -->
+<div class="about-strip">
+  <div class="as-item"><span class="as-bold">IGN Consulting</span> — Est. 2007</div>
+  <div class="as-item">Manufacturing <span class="as-bold">&</span> Industrial</div>
+  <div class="as-item">Healthcare <span class="as-bold">&</span> Compliance</div>
+  <div class="as-item">Finance <span class="as-bold">&</span> FinTech</div>
+  <div class="as-item">Enterprise Systems</div>
+  <div class="as-item">Web <span class="as-bold">&</span> Application Dev</div>
+</div>
+
+<!-- SERVICES -->
+<section id="services" class="services">
+  <div class="sec-head rv">
+    <div>
+      <span class="sec-tag">01 — What we do</span>
+      <h2 class="sec-h2">Complex problems.<br><em>Custom solutions.</em></h2>
+    </div>
+    <p class="sec-desc">We don't sell packages or templates. Every engagement starts with a conversation and ends with something built specifically for your organisation's needs.</p>
+  </div>
+  <div class="srv-grid">
+    <div class="srv rv d1">
+      <div class="srv-num">01 / 06</div>
+      <div class="srv-title">Custom Software Development</div>
+      <div class="srv-desc">End-to-end development of proprietary business applications. Desktop, web, and hybrid — built to your exact specifications with no off-the-shelf compromises.</div>
+      <a href="#contact" class="srv-link">Discuss your project →</a>
+    </div>
+    <div class="srv rv d2">
+      <div class="srv-num">02 / 06</div>
+      <div class="srv-title">Systems Integration</div>
+      <div class="srv-desc">Connecting legacy systems, third-party APIs, and modern platforms into a single cohesive architecture. We make disparate systems talk to each other.</div>
+      <a href="#contact" class="srv-link">Learn more →</a>
+    </div>
+    <div class="srv rv d3">
+      <div class="srv-num">03 / 06</div>
+      <div class="srv-title">Process Automation</div>
+      <div class="srv-desc">Identify, design, and deploy automation across your operational workflow. From data entry elimination to full pipeline orchestration.</div>
+      <a href="#contact" class="srv-link">Learn more →</a>
+    </div>
+    <div class="srv rv d1">
+      <div class="srv-num">04 / 06</div>
+      <div class="srv-title">Web Application Development</div>
+      <div class="srv-desc">High-performance web applications built for scale. From customer portals to internal tools — fast, secure, and maintainable.</div>
+      <a href="#contact" class="srv-link">Learn more →</a>
+    </div>
+    <div class="srv rv d2">
+      <div class="srv-num">05 / 06</div>
+      <div class="srv-title">Technical Consulting</div>
+      <div class="srv-desc">Architecture reviews, technology selection, team augmentation, and strategic roadmapping. We've been doing this since 2007.</div>
+      <a href="#contact" class="srv-link">Learn more →</a>
+    </div>
+    <div class="srv rv d3">
+      <div class="srv-num">06 / 06</div>
+      <div class="srv-title">Legacy Modernisation</div>
+      <div class="srv-desc">Migrate, refactor, or rebuild ageing systems without disrupting operations. We specialise in careful, phased transitions with zero downtime.</div>
+      <a href="#contact" class="srv-link">Learn more →</a>
+    </div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section id="work" class="work">
+  <div class="work-inner">
+    <div class="work-head rv">
+      <div>
+        <span class="sec-tag" style="color:rgba(255,255,255,.3)">02 — Past work</span>
+        <h2 class="work-h2">Selected<br><em>projects</em></h2>
+      </div>
+      <a href="#contact" class="work-link">Work with us →</a>
+    </div>
+    <div class="work-grid rv d1">
+      <div class="wc">
+        <div class="wc-tag"><div class="wc-dot"></div>Manufacturing</div>
+        <div class="wc-title">Plant Operations Dashboard</div>
+        <div class="wc-desc">Real-time monitoring system for a 3-plant manufacturing operation. Replaced 4 disconnected tools with a single unified interface, reducing reporting time by 60%.</div>
+        <div class="wc-industry">C# · .NET · SQL Server</div>
+      </div>
+      <div class="wc">
+        <div class="wc-tag"><div class="wc-dot"></div>Healthcare</div>
+        <div class="wc-title">Compliance Tracking System</div>
+        <div class="wc-desc">HIPAA-compliant document and audit trail system for a regional healthcare provider. Full API integration with their existing EHR platform.</div>
+        <div class="wc-industry">Web App · REST API</div>
+      </div>
+      <div class="wc">
+        <div class="wc-tag"><div class="wc-dot"></div>Finance</div>
+        <div class="wc-title">Portfolio Risk Calculator</div>
+        <div class="wc-desc">Custom financial modelling tool with real-time data feeds and scenario analysis for a mid-size asset manager.</div>
+        <div class="wc-industry">Python · .NET · Excel</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact">
+  <div class="con-left rv">
+    <span class="con-tag">03 — Get in touch</span>
+    <h2 class="con-h2">Start a<br><em>conversation</em></h2>
+    <p class="con-sub">Tell us about your project and we'll respond within one business day. No commitment required.</p>
+    <div class="con-info">
+      <div class="ci"><div class="ci-label">Email</div><div class="ci-value">hello@ignconsulting.com</div></div>
+      <div class="ci"><div class="ci-label">Phone</div><div class="ci-value">+1 (800) IGN-CONS</div></div>
+      <div class="ci"><div class="ci-label">Location</div><div class="ci-value">Lexington, United States</div></div>
+      <div class="ci"><div class="ci-label">Hours</div><div class="ci-value">Mon–Fri, 9am–6pm EST</div></div>
+    </div>
+  </div>
+  <div class="rv d2">
+    <div class="form-row" style="margin-bottom:20px">
+      <div class="ff"><label>First Name</label><input type="text" placeholder="James"/></div>
+      <div class="ff"><label>Last Name</label><input type="text" placeholder="Smith"/></div>
+    </div>
+    <div class="ff"><label>Company</label><input type="text" placeholder="Acme Corp"/></div>
+    <div class="ff"><label>Email</label><input type="email" placeholder="james@acmecorp.com"/></div>
+    <div class="ff">
+      <label>Industry</label>
+      <select>
+        <option value="" disabled selected>Select your industry</option>
+        <option>Manufacturing</option>
+        <option>Healthcare</option>
+        <option>Finance</option>
+        <option>Technology</option>
+        <option>Other</option>
+      </select>
+    </div>
+    <div class="ff"><label>Project details</label><textarea rows="5" placeholder="Describe your project or challenge…"></textarea></div>
+    <button class="fsub" onclick="this.textContent='Message sent — we\'ll be in touch shortly.';this.style.background='#2d4a2d'">Send Message</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a href="/" class="logo ft-logo">
+    <div class="logo-mark">IGN</div>
+    <div>
+      <div class="logo-text">IGN Consulting</div>
+      <span class="logo-sub">Custom Development</span>
+    </div>
+  </a>
+  <div class="ft-links">
+    <a href="#services">Services</a>
+    <a href="#work">Our Work</a>
+    <a href="#contact">Contact</a>
+    <a href="#privacy" id="privacy">Privacy Policy</a>
+  </div>
+  <div class="ft-copy">© 2025 IGN Consulting.<br>All rights reserved.</div>
+</footer>
+
+<script>
+window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('s',scrollY>50));
+const o=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');o.unobserve(e.target)}})},{threshold:.08});
+document.querySelectorAll('.rv').forEach(el=>o.observe(el));
+</script>
+</body>
+</html>
